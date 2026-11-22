@@ -1,0 +1,9 @@
+{
+  "name": "authenticator",
+  "version": "1.0.0",
+  "description": "A small TOTP authenticator in plain HTML and JavaScript.",
+  "private": true,
+  "scripts": {
+    "start": "python3 -m http.server 8080"
+  }
+}

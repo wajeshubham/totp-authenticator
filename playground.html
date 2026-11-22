@@ -1,0 +1,39 @@
+<!doctype html>
+<!--
+  playground.html: a tiny "server" for testing an authenticator app.
+  Scan its QR code with any authenticator app, then type the app's code here to check it.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TOTP Playground</title>
+  <link rel="icon" href="data:,">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.5/dist/index.global.js" integrity="sha384-t+qLIxS5zM/KF99/doWY+dxTsavdvgayaZt8A9ntLsUjEkiXzYl5M3Ij8zVFPL9j" crossorigin="anonymous"></script>
+  <!-- A small library that draws QR codes. It gives us a qrcode() function. -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@2.0.4/dist/qrcode.js" integrity="sha384-e9EFD6BGC90bkW9aDV5xbbBfzwN7G8YImHao2lfLVKV/hPB0E0go+H3I64h7oHtA" crossorigin="anonymous"></script>
+  <script type="module" src="js/playground.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <div class="max-w-lg mx-auto p-4">
+    <header class="flex items-center gap-4 mb-6">
+      <h1 class="text-xl font-bold mr-auto">TOTP Playground</h1>
+      <a href="index.html" class="text-blue-600 hover:underline">Open the app</a>
+    </header>
+
+    <form id="verify-form" class="bg-white border border-gray-200 rounded-lg p-4 space-y-3">
+      <p class="text-sm text-gray-600">Scan this QR code with an authenticator app, then type the code it shows. You can also choose "Enter a setup key" in the app and type the secret key instead.</p>
+      <img id="qr-code" alt="QR code for the secret key below" class="mx-auto" hidden>
+      <p id="setup-link" class="font-mono text-xs text-gray-500 break-all empty:hidden"></p>
+      <label class="block text-sm">Secret key
+        <textarea id="secret-input" rows="2" required autocomplete="off" spellcheck="false" class="mt-1 w-full border border-gray-300 rounded px-3 py-2 font-mono text-lg resize-none"></textarea>
+      </label>
+      <label class="block text-sm">Code from your app
+        <input id="code-input" required inputmode="numeric" autocomplete="off" pattern="\d{6}" title="6 digits" placeholder="123456" class="mt-1 w-full border border-gray-300 rounded px-3 py-2 font-mono text-lg">
+      </label>
+      <button class="bg-blue-600 text-white rounded px-4 py-2 font-medium hover:bg-blue-700">Verify</button>
+      <p id="result" class="empty:hidden"></p>
+    </form>
+  </div>
+</body>
+</html>
